@@ -4,13 +4,17 @@ const cors=require('cors')
 const Router=require('./routes/userRoute')
 const flowRouter=require('./routes/flowRoute')
 const http=require('http')
-
+const swaggerUI=require('swagger-ui-express')
+const options=require('./routes/swagger')
 require('./database/DB')
 require('./controllers/sensorSimulator')
 const sensorSim=require('./controllers/sensorSimulator')
 
 //creates server
 const server=express()
+
+
+  
 
 
 //for parsing
@@ -20,6 +24,7 @@ server.use(cors())
 //using Router
 server.use(Router)
 server.use(flowRouter)
+server.use('/api-docs',swaggerUI.serve,swaggerUI.setup(options))
 
 //used for websocket server creation
 const ioServerCreation=http.createServer(server)
