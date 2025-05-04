@@ -4,7 +4,7 @@ const cors=require('cors')
 const Router=require('./routes/userRoute')
 const flowRouter=require('./routes/flowRoute')
 const http=require('http')
-const socketio=require('socket.io')
+
 require('./database/DB')
 require('./controllers/sensorSimulator')
 const sensorSim=require('./controllers/sensorSimulator')
@@ -21,14 +21,15 @@ server.use(cors())
 server.use(Router)
 server.use(flowRouter)
 
+//used for websocket server creation
 const ioServerCreation=http.createServer(server)
 
 const io=require('socket.io')(ioServerCreation,{
     cors:{origin:"*",methods: ['GET', 'POST']}
 })
 
-sensorSim.startSensoring(io)
-
+//for callin the sensor when the server runs
+sensorSim.startSensoring(io);
 
 io.on('connection',(socket)=>{
     console.log('Connected io')
@@ -41,6 +42,8 @@ io.on('connection',(socket)=>{
 
 server.set('io',io)
 
+
+
 //port
 const PORT=3000||process.env.PORT
 
@@ -48,4 +51,3 @@ const PORT=3000||process.env.PORT
 ioServerCreation.listen(PORT,()=>{
     console.log(`Server running on http://localhost:${PORT}`)
 })
-

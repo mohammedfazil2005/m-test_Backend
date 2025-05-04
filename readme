@@ -1,0 +1,116 @@
+#  AI-Enhanced Real-Time Dashboard – Backend (Node.js + Express + MongoDB)
+
+This is the **backend** of the AI-Enhanced MERN Real-Time Dashboard and Flowchart Editor. Built using **Node.js**, **Express**, **MongoDB**, and **Socket.IO**, this service handles:
+
+-  OTP-based authentication
+-  Real-time sensor data simulation & broadcast
+-  Flowchart saving, loading, and updating
+-  JWT-secured endpoints
+-  AI-assisted logic and architecture
+
+---
+
+##  Tech Stack
+
+- 🔹 Node.js + Express
+- 🔹 MongoDB + Mongoose
+- 🔹 Socket.IO for real-time communication
+- 🔹 Nodemailer for OTP via email
+- 🔹 JWT for route protection
+- 🔹 dotenv for environment config
+- 🔹 AI Tools: ChatGPT, GitHub Copilot
+
+---
+
+##  Features
+
+###  Auth API
+
+- `POST /register` – Register user
+- `POST /register/:otp` – Verify OTP sent via email
+- `POST /login` – Login with credentials
+- `GET /fetch/profile` – Get user profile (JWT protected)
+
+### 📡 Data API
+
+- `POST /api/data/start` – Start the real-time sensor simulator
+- `POST /api/data/stop` – Stop simulator
+
+> Sensor emits values via Socket.IO every 1–2 seconds.
+
+###  Flow API
+
+- `POST /flow/save` – Save flowchart (nodes & edges)
+- `GET /flow/load` – Load saved flowchart
+
+---
+
+##  Installation
+
+### 1️ Clone the Repo & Navigate to Server Folder
+
+```bash
+git clone https://github.com/your-username/ai-dashboard.git
+cd ai-dashboard/server
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Environment Configuration
+
+Create a `.env` file in the `server` directory:
+
+```env
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/ai-dashboard
+JWT_SECRET=your_jwt_secret
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password_or_app_password
+CLIENT_URL=http://localhost:5173
+```
+
+> ⚠️ Use a secure app password if using Gmail.
+
+---
+
+##  Start the Server
+
+```bash
+npm start
+```
+
+> Server will run on: [http://localhost:3000](http://localhost:3000)
+
+---
+
+
+
+## 🤖 AI Contributions
+
+- **OTP Logic & Email Handling** → Scaffolded via ChatGPT
+- **Socket.IO Real-time Broadcast** → Generated using Copilot prompts
+- **CRUD APIs for Flow Editor** → Scaffolded with ChatGPT & refined manually
+- **Security Middleware** → Auth routes protected with JWT using AI-assisted templates
+
+---
+
+##  Demo Flow
+
+1.  User signs up, receives OTP email
+2.  Verifies OTP → Login → Receives JWT
+3.  Real-time data starts from simulator
+4.  React client listens via Socket.IO
+5.  Flowchart editor sends & saves node/edge changes
+6.  Flow saved in MongoDB
+
+---
+
+##  License
+
+This project is intended for evaluation and educational purposes only.

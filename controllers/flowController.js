@@ -1,4 +1,5 @@
 const flowModel=require('../models/flowModel')
+//on saving user flow!
 exports.addFlow=async(req,res)=>{
     const userID=req.userID
     const {nodes,edges}=req.body
@@ -19,6 +20,7 @@ exports.addFlow=async(req,res)=>{
     }
 }
 
+//on fetching user flow
 exports.getFlow=async(req,res)=>{
     const userID=req.userID
     try {

@@ -3,6 +3,7 @@ const nodemailer=require('nodemailer')
 //created a transporter for sending email from where
 const transporter=nodemailer.createTransport({
     service:'gmail',
+    //provider email and pass
     auth:{
         user:process.env.GMAIL_ID,
         pass:process.env.GMAIL_PASSWORD
@@ -10,6 +11,7 @@ const transporter=nodemailer.createTransport({
 })
 
 const sendOTP=async(email,OTP)=>{
+    //email options
     const mailOptions={
         from:process.env.GMAIL_ID,
         to:email,
@@ -17,6 +19,7 @@ const sendOTP=async(email,OTP)=>{
         text:`Verfiy your account by entering the OTP ${OTP},  It will expire in 5 minutes.`
     }
     try {
+        //sending mail
         await transporter.sendMail(mailOptions)
         return {status:200,message:"OTP Sent succesfully"}
     } catch (error) {
