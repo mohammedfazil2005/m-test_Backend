@@ -62,6 +62,7 @@ exports.onVerifyOTP=async(req,res)=>{
     }
 }
 
+//onLogin
 exports.onLogin=async(req,res)=>{
     const {email,password}=req.body
     try {
@@ -70,6 +71,26 @@ exports.onLogin=async(req,res)=>{
         if(isUserExists){
             let token=jwt.sign({userID:isUserExists._id},process.env.SUPER_SECRET_KEY)
             res.status(200).json({message:"Login success",token:token})
+        }else{
+            res.status(404).json({message:"User not found!"})
+        }
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+//onProfile
+
+exports.onFetchProfile=async(req,res)=>{
+    const userID=req.userID
+    try {
+        const isUserExists=await users.findById(userID)
+        if(isUserExists){
+            let payload={
+                name:isUserExists.name,
+                email:isUserExists.email
+            }
+            res.status(200).json({data:payload})
         }else{
             res.status(404).json({message:"User not found!"})
         }

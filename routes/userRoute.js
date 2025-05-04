@@ -16,7 +16,9 @@ Router.post('/register/:otp',userController.onVerifyOTP)
 
 Router.post('/login',userController.onLogin)
 
-//
+//onFetchProfile 
+
+Router.get('/fetch/profile',Authentication,userController.onFetchProfile)
 
 
 
