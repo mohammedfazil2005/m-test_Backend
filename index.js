@@ -2,6 +2,7 @@ require('dotenv').config()
 const express=require('express')
 const cors=require('cors')
 const Router=require('./routes/userRoute')
+const flowRouter=require('./routes/flowRoute')
 const http=require('http')
 const socketio=require('socket.io')
 require('./database/DB')
@@ -18,6 +19,7 @@ server.use(express.json())
 server.use(cors())
 //using Router
 server.use(Router)
+server.use(flowRouter)
 
 const ioServerCreation=http.createServer(server)
 
